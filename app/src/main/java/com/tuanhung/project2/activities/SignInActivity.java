@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.tuanhung.project2.R;
 import com.tuanhung.project2.databinding.ActivitySignInBinding;
+
+import java.util.HashMap;
 
 public class SignInActivity extends AppCompatActivity {
 
