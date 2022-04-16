@@ -1,8 +1,10 @@
-package com.tuanhung.project2;
+package com.tuanhung.project2.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.tuanhung.project2.R;
 
 public class MainActivity extends AppCompatActivity {
 
