@@ -3,10 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Hung Mai/AndroidStudioProjects/project2/app/src/main/res/drawable/background_content_bottom.xml" value="0.2255" />
+        <entry key="..\:/Users/Hung Mai/AndroidStudioProjects/project2/app/src/main/res/drawable/background_icon.xml" value="0.2255" />
         <entry key="..\:/Users/Hung Mai/AndroidStudioProjects/project2/app/src/main/res/drawable/background_image.xml" value="0.2435" />
         <entry key="..\:/Users/Hung Mai/AndroidStudioProjects/project2/app/src/main/res/drawable/background_input.xml" value="0.2435" />
+        <entry key="..\:/Users/Hung Mai/AndroidStudioProjects/project2/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Hung Mai/AndroidStudioProjects/project2/app/src/main/res/layout/activity_sign_in.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/Hung Mai/AndroidStudioProjects/project2/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
+        <entry key="..\:/Users/Hung Mai/AndroidStudioProjects/project2/app/src/main/res/layout/activity_users.xml" value="0.25" />
+        <entry key="..\:/Users/Hung Mai/AndroidStudioProjects/project2/app/src/main/res/layout/item_container_user.xml" value="0.25" />
       </map>
     </option>
   </component>
