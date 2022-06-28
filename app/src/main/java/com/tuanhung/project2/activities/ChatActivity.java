@@ -5,10 +5,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.EmojiCompatConfigurationView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.firestore.DocumentChange;
@@ -17,6 +19,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.tuanhung.project2.R;
 import com.tuanhung.project2.adapters.ChatAdapter;
 import com.tuanhung.project2.databinding.ActivityChatBinding;
 import com.tuanhung.project2.models.ChatMessage;
@@ -25,6 +28,12 @@ import com.tuanhung.project2.network.ApiClient;
 import com.tuanhung.project2.network.ApiService;
 import com.tuanhung.project2.ultilities.Constants;
 import com.tuanhung.project2.ultilities.PreferenceManager;
+import com.vanniktech.emoji.EmojiManager;
+import com.vanniktech.emoji.EmojiPopup;
+import com.vanniktech.emoji.EmojiProvider;
+import com.vanniktech.emoji.EmojiTextView;
+import com.vanniktech.emoji.emoji.EmojiCategory;
+import com.vanniktech.emoji.google.GoogleEmojiProvider;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,6 +72,16 @@ public class ChatActivity extends BaseActivity {
         loadReceiverDetails();
         init();
         listenMessages();
+
+        EmojiManager.install(new GoogleEmojiProvider());
+        EmojiPopup popup = EmojiPopup.Builder.fromRootView(binding.rootView).build(binding.inputMessage);
+
+        binding.layoutEmoji.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popup.toggle();
+            }
+        });
     }
 
     private void init() {
@@ -223,11 +242,12 @@ public class ChatActivity extends BaseActivity {
             Collections.sort(chatMessages, (obj1, obj2) -> obj1.dateObject.compareTo(obj2.dateObject));
             if(count == 0) {
                 chatAdapter.notifyDataSetChanged();
+
             } else {
                 chatAdapter.notifyItemRangeInserted(chatMessages.size(), chatMessages.size());
                 binding.chatRecyclerView.smoothScrollToPosition(chatMessages.size() - 1);
             }
-            binding.chatRecyclerView.setVisibility(View.VISIBLE);
+
         }
         binding.progressBar.setVisibility(View.GONE);
         if(conversionId == null) {

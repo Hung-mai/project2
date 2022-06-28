@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:background="@color/primary"
+    android:id="@+id/rootView"
     tools:context=".activities.ChatActivity">
 
     <View
@@ -101,12 +102,15 @@
         app:layout_constraintStart_toStartOf="@id/viewBackground"
         app:layout_constraintTop_toTopOf="@id/viewBackground"/>
 
+
+
+
     <FrameLayout
         android:id="@+id/layoutSend"
         android:layout_width="@dimen/_40sdp"
         android:layout_height="@dimen/_40sdp"
-        android:layout_marginEnd="@dimen/_16sdp"
-        android:layout_marginRight="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:layout_marginRight="@dimen/_8sdp"
         android:layout_marginBottom="@dimen/_12sdp"
         android:background="@drawable/background_chat_input"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -119,7 +123,28 @@
             android:layout_marginLeft="@dimen/_4sdp"
             android:padding="@dimen/_8sdp"
             android:src="@drawable/ic_send"
-            app:tint="@color/white"/>
+            app:tint="@color/primary_dark"/>
+
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/layoutEmoji"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginLeft="@dimen/_8sdp"
+        android:layout_marginBottom="@dimen/_12sdp"
+        android:background="@drawable/background_chat_input"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/_8sdp"
+            android:src="@drawable/ic_emoji"
+            app:tint="@color/primary_dark"/>
 
 
     </FrameLayout>
@@ -128,8 +153,8 @@
         android:id="@+id/inputMessage"
         android:layout_width="0dp"
         android:layout_height="@dimen/_40sdp"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginLeft="@dimen/_16sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginLeft="@dimen/_8sdp"
         android:layout_marginEnd="@dimen/_8sdp"
         android:layout_marginRight="@dimen/_8sdp"
         android:layout_marginBottom="@dimen/_12sdp"
@@ -140,11 +165,11 @@
         android:inputType="text"
         android:paddingStart="@dimen/_16sdp"
         android:paddingEnd="@dimen/_16sdp"
-        android:textColor="@color/white"
+        android:textColor="@color/primary_dark"
         android:textColorHint="@color/secondary_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/layoutSend"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toEndOf="@id/layoutEmoji"/>
 
     <TextView
         android:id="@+id/textAvailablity"
