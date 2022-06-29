@@ -246,8 +246,9 @@ public class ChatActivity extends BaseActivity {
             } else {
                 chatAdapter.notifyItemRangeInserted(chatMessages.size(), chatMessages.size());
                 binding.chatRecyclerView.smoothScrollToPosition(chatMessages.size() - 1);
-            }
 
+            }
+            binding.chatRecyclerView.setVisibility(View.VISIBLE);
         }
         binding.progressBar.setVisibility(View.GONE);
         if(conversionId == null) {
@@ -303,6 +304,9 @@ public class ChatActivity extends BaseActivity {
                     receiverUser.id,
                     preferenceManager.getString(Constants.KEY_USER_ID)
             );
+            binding.layoutStart.setVisibility(View.INVISIBLE);
+        } else {
+            binding.layoutStart.setVisibility(View.VISIBLE);
         }
     }
 
