@@ -2,7 +2,10 @@ package com.tuanhung.project2.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -20,6 +23,9 @@ public class UsersActivity extends BaseActivity implements UserListener {
 
     private ActivityUsersBinding binding;
     private PreferenceManager preferenceManager;
+    List<User> users = new ArrayList<>();
+    List<User> users2 = new ArrayList<>();
+    UserListener userListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,12 +33,55 @@ public class UsersActivity extends BaseActivity implements UserListener {
         binding = ActivityUsersBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         preferenceManager = new PreferenceManager(getApplicationContext());
+        userListener = this;
         setListener();
         getUsers();
     }
 
     private void setListener() {
         binding.imageBack.setOnClickListener(v -> onBackPressed());
+        binding.inputName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                loading(true);
+                users2.clear();
+                if(!charSequence.toString().equals("") ) {
+                    //do your work here
+                    for (int j = 0; j < users.size(); j++) {
+                        if(users.get(j).name.contains(charSequence.toString()) || users.get(j).email.contains(charSequence.toString())) {
+                            users2.add(users.get(j));
+                        }
+                    }
+
+                    if(users2.size() > 0) {  // neeus co user thif ms hienj ra
+                        UserAdapter userAdapter = new UserAdapter(users2, userListener);
+                        binding.usersRecyclerView.setAdapter(userAdapter);
+                        binding.usersRecyclerView.setVisibility(View.VISIBLE);
+                    }
+
+
+                } else {
+                    if(users.size() > 0) {  // neeus co user thif ms hienj ra
+                        UserAdapter userAdapter = new UserAdapter(users, userListener);
+                        binding.usersRecyclerView.setAdapter(userAdapter);
+                        binding.usersRecyclerView.setVisibility(View.VISIBLE);
+                    }
+                }
+
+                loading(false);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     private void getUsers() {
@@ -44,7 +93,7 @@ public class UsersActivity extends BaseActivity implements UserListener {
                     loading(false);
                     String currentUserId = preferenceManager.getString(Constants.KEY_USER_ID);
                     if(task.isSuccessful() && task.getResult() != null) {
-                        List<User> users = new ArrayList<>();
+
                         for(QueryDocumentSnapshot queryDocumentSnapshot : task.getResult()) {
                             // nếu user đc lấy ra trong data này mà trùng vs user hiện đang đăng nhập thì bỏ qua
                             if(currentUserId.equals(queryDocumentSnapshot.getId())) {
@@ -91,5 +140,9 @@ public class UsersActivity extends BaseActivity implements UserListener {
         intent.putExtra(Constants.KEY_USER, user);
         startActivity(intent);
         finish();
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 }

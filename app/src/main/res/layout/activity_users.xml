@@ -23,6 +23,7 @@
         android:tint="@color/white"/>
 
     <TextView
+        android:id="@+id/titl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/select_user"
@@ -34,13 +35,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/imageBack" />
 
+    <EditText
+        android:id="@+id/inputName"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_45sdp"
+        android:background="@drawable/background_input"
+        android:hint="@string/nameOrEmail"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginLeft="@dimen/_8sdp"
+        android:layout_marginRight="@dimen/_8sdp"
+        android:paddingStart="@dimen/_16sdp"
+        android:paddingEnd="@dimen/_16sdp"
+        android:textColor="@color/primary_text"
+        android:textSize="@dimen/_13ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageBack" />
+
     <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/_16sdp"
         android:background="@drawable/background_content_bottom"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageBack">
+        app:layout_constraintTop_toBottomOf="@id/inputName">
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -52,13 +73,13 @@
             android:overScrollMode="never"
             android:padding="@dimen/_20sdp"
             android:visibility="gone"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="@dimen/_25sdp"
             android:layout_height="@dimen/_25sdp"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center" />
 
         <TextView
             android:id="@+id/textErrorMessage"
